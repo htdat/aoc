@@ -1,1 +1,1 @@
-My work for **Advent of Code** edition 2022 - https://adventofcode.com/2022
+My work for **Advent of Code** https://adventofcode.com/
