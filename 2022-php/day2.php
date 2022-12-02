@@ -4,13 +4,13 @@ const ROCK = 'rock';
 const SCISSOR = 'scissors';
 const PAPER = 'paper';
 
-CONST opponent_shape = [
+CONST OPPONENT_SHAPE = [
 	'A' => ROCK,
 	'B' => PAPER,
 	'C' => SCISSOR,
 ];
 
-CONST my_shape = [
+CONST MY_SHAPE = [
 	'X' => ROCK,
 	'Y' => PAPER,
 	'Z' => SCISSOR,
@@ -42,9 +42,7 @@ const GAME_POINTS = [
 
 function get_points( string $opponent, string $mine ): int {
 	$game_point = GAME_POINTS[$opponent][$mine];
-//	var_dump( $game_point );
 	$tool_point = TOOL_POINTS[$mine];
-//var_dump($tool_point);
 	return $game_point + $tool_point;
 }
 
@@ -54,32 +52,34 @@ $inputs = file( $input_file, FILE_IGNORE_NEW_LINES );
 $total = 0;
 foreach ( $inputs as $round ) {
 	list($opponent, $mine) = explode( ' ', $round );
-	$total = $total + get_points( opponent_shape[$opponent], my_shape[$mine]);
-//	exit;
-//	var_dump( $opponent, $mine, $round, opponent_shape[$opponent], my_shape[$mine], get_points( opponent_shape[$opponent], my_shape[$mine] )); exit;
-
+	$total = $total + get_points( OPPONENT_SHAPE[$opponent], MY_SHAPE[$mine]);
 }
 
-echo $total;
+echo $total; // 12679
 
-// Part 2
+/**
+ * Part 2
+ */
 // X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win
+const LOSE = 'X';
+const DRAW = 'Y';
+const WIN = 'Z';
 
 const PART_TWO = [
 	ROCK => [
-		'X' => SCISSOR,
-		'Y' => ROCK,
-		'Z' => PAPER,
+		LOSE => SCISSOR,
+		DRAW => ROCK,
+		WIN => PAPER,
 	],
 	PAPER => [
-		'X' => ROCK,
-		'Y' => PAPER,
-		'Z' => SCISSOR,
+		LOSE => ROCK,
+		DRAW => PAPER,
+		WIN => SCISSOR,
 	],
 	SCISSOR => [
-		'X' => PAPER,
-		'Y' => SCISSOR,
-		'Z' => ROCK,
+		LOSE => PAPER,
+		DRAW => SCISSOR,
+		WIN => ROCK,
 	],
 ];
 
@@ -87,11 +87,8 @@ $total_two = 0;
 
 foreach ( $inputs as $round ) {
 	list($opponent, $indicator) = explode( ' ', $round );
-	$mine = PART_TWO[$opponent][$indicator];
-	$total_two = $total_two + get_points( opponent_shape[$opponent], my_shape[$mine]);
-//	exit;
-//	var_dump( $opponent, $mine, $round, opponent_shape[$opponent], my_shape[$mine], get_points( opponent_shape[$opponent], my_shape[$mine] )); exit;
-
+	$mine = PART_TWO[OPPONENT_SHAPE[$opponent]][$indicator];
+	$total_two = $total_two + get_points( OPPONENT_SHAPE[$opponent], $mine);
 }
 echo PHP_EOL;
-echo $total_two;
+echo $total_two; // 14470
