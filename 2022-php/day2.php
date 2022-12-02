@@ -61,3 +61,37 @@ foreach ( $inputs as $round ) {
 }
 
 echo $total;
+
+// Part 2
+// X means you need to lose, Y means you need to end the round in a draw, and Z means you need to win
+
+const PART_TWO = [
+	ROCK => [
+		'X' => SCISSOR,
+		'Y' => ROCK,
+		'Z' => PAPER,
+	],
+	PAPER => [
+		'X' => ROCK,
+		'Y' => PAPER,
+		'Z' => SCISSOR,
+	],
+	SCISSOR => [
+		'X' => PAPER,
+		'Y' => SCISSOR,
+		'Z' => ROCK,
+	],
+];
+
+$total_two = 0;
+
+foreach ( $inputs as $round ) {
+	list($opponent, $indicator) = explode( ' ', $round );
+	$mine = PART_TWO[$opponent][$indicator];
+	$total_two = $total_two + get_points( opponent_shape[$opponent], my_shape[$mine]);
+//	exit;
+//	var_dump( $opponent, $mine, $round, opponent_shape[$opponent], my_shape[$mine], get_points( opponent_shape[$opponent], my_shape[$mine] )); exit;
+
+}
+echo PHP_EOL;
+echo $total_two;
