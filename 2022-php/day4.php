@@ -8,6 +8,8 @@ foreach( $inputs as $line ) {
 	list( $pair1, $pair2 ) = explode(',', $line );
 	list( $h1, $t1 ) = explode('-', $pair1 );
 	list( $h2, $t2 ) = explode('-', $pair2 );
+	$h1 = (int) $h1; $t1 = (int) $t1;
+	$h2 = (int) $h2; $t2 = (int) $t2;
 
 	if ( ( $h2 <= $h1 && $t1 <= $t2 )
 		|| ( $h1<= $h2 && $t2 <= $t1 )
