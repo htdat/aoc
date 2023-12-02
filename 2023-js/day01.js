@@ -62,4 +62,4 @@ const linesPart2 = lines.map(line => {
 });
 
 const sumPart2 = getArraySum(getCals(linesPart2));
-console.log( 'Part 2: ' + sumPart2); // 54983 55603 54976 55652
+console.log( 'Part 2: ' + sumPart2); // 55652
